@@ -1,0 +1,38 @@
+{
+  "expo": {
+    "name": "Pawsitive Pet Academy",
+    "slug": "pawsitive-pet-academy",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.pawsitive.petacademy"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#0B5E5E",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "package": "com.pawsitive.petacademy"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "description": "Courses, course details, fee quotes and contact details for Pawsitive Pet Academy, Durban.",
+    "primaryColor": "#0B5E5E",
+    "plugins": [
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash-icon.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#FAF6F0"
+        }
+      ]
+    ]
+  }
+}
