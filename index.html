@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pawsitive Pet Academy</title>
+<meta name="description" content="Pawsitive Pet Academy in Durban: practical pet care education, six-month programmes and six-week short courses.">
+<meta name="theme-color" content="#0B5E5E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%230B5E5E'/%3E%3Cg fill='%23fff'%3E%3Cellipse cx='27' cy='42' rx='8' ry='11'/%3E%3Cellipse cx='42' cy='28' rx='8' ry='11'/%3E%3Cellipse cx='58' cy='28' rx='8' ry='11'/%3E%3Cellipse cx='73' cy='42' rx='8' ry='11'/%3E%3Cpath d='M50 82c-18 0-26-14-17-25 6-7 28-7 34 0 9 11 1 25-17 25z'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<noscript><p>This site needs JavaScript for its menus, course pages and fee calculator. Please turn JavaScript on.</p></noscript>
+<a class="skip" href="#main" id="skip">Skip to main content</a>
+
+<header>
+  <div class="bar">
+    <a class="brand" href="#home" aria-label="Pawsitive Pet Academy home">
+      <svg width="38" height="38" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#fff"/><g fill="#0F7C7C"><ellipse cx="27" cy="42" rx="8" ry="11"/><ellipse cx="42" cy="28" rx="8" ry="11"/><ellipse cx="58" cy="28" rx="8" ry="11"/><ellipse cx="73" cy="42" rx="8" ry="11"/><path d="M50 82c-18 0-26-14-17-25 6-7 28-7 34 0 9 11 1 25-17 25z"/></g><path d="M50 74c-8-6-11-10-8-14 3-3 7-2 8 1 1-3 5-4 8-1 3 4 0 8-8 14z" fill="#F4A259"/></svg>
+      Pawsitive Pet Academy</a>
+
+    <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="nav">&#9776; Menu</button>
+
+    <nav id="nav" aria-label="Main">
+      <a class="nav-link" href="#home" data-v="home">Home</a>
+      <a class="nav-link" href="#about" data-v="about">About Us</a>
+      <!-- Courses drop-down menu: filled from the course array in js/script.js -->
+      <div class="drop">
+        <button class="nav-link" id="drop-btn" type="button" aria-expanded="false" aria-controls="drop-menu" data-v="courses">Courses<span class="caret" aria-hidden="true">&#9662;</span></button>
+        <div class="drop-menu" id="drop-menu" hidden></div>
+      </div>
+      <a class="nav-link" href="#fees" data-v="fees">Calculate Fees<span class="badge" id="badge" hidden><span id="badge-n">0</span><span class="sr-only"> courses selected</span></span></a>
+      <a class="nav-link" href="#contact" data-v="contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+
+<!-- ================= HOME ================= -->
+<section id="home" class="view" aria-labelledby="home-h">
+  <div class="hero">
+    <div>
+      <h1 id="home-h">Practical pet care skills, taught with heart</h1>
+      <p>Pawsitive Pet Academy in Durban teaches pet owners, pet sitters, kennel staff and aspiring professionals how to care for, train and work with animals. Choose a six-month programme or a six-week short course.</p>
+      <a class="btn" href="#courses">Browse courses</a> <a class="btn alt" href="#fees">Get a quote</a>
+    </div>
+    <div class="pic" role="img" aria-label="Dog and paw prints">&#128021;&#128062;</div>
+  </div>
+  <h2>Where would you like to start?</h2>
+  <div class="grid">
+    <div class="card"><div class="pic" aria-hidden="true">&#127891;</div><h3>Six-month programmes</h3><p>Canine Obedience, Pet Grooming, Animal Behaviour and Pet Business Management.</p><a href="#courses">See the programmes</a></div>
+    <div class="card"><div class="pic warm" aria-hidden="true">&#129654;</div><h3>Six-week short courses</h3><p>Puppy Care, Pet First Aid and Basic Dog Walking.</p><a href="#courses">See the short courses</a></div>
+    <div class="card"><div class="pic" aria-hidden="true">&#128176;</div><h3>Save when you combine</h3><p>Two courses save 5%, three save 10%, and more than three save 15%.</p><a href="#fees">Calculate your fees</a></div>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section id="about" class="view" aria-labelledby="about-h">
+  <h1 id="about-h">About us</h1>
+  <div class="two">
+    <div>
+      <h2>Our history</h2>
+      <p>Pawsitive Pet Academy was established in 2023 by Sarah Smith and offers training courses in Durban. Hundreds of pet owners and aspiring pet care professionals have completed our six-month Professional Development Programmes and six-week Practical Skills Courses.</p>
+      <p>Sarah noticed that many people own pets without knowing much about proper care, training, nutrition or emergency care. The academy exists to change that, and to create jobs in the pet care industry.</p>
+    </div>
+    <div class="pic warm" role="img" aria-label="Cat and dog">&#128008;&#128054;</div>
+  </div>
+  <div class="grid section-gap">
+    <div class="card"><h3>Vision</h3><p>A community where every pet is cared for by someone who knows how.</p></div>
+    <div class="card"><h3>Mission</h3><p>To give people practical, professional pet care skills that improve animal wellbeing and open career opportunities.</p></div>
+    <div class="card"><h3>Goals</h3><ul class="tick"><li>Grow graduate numbers every year</li><li>Help graduates start or join pet businesses</li><li>Keep courses practical and affordable</li></ul></div>
+  </div>
+</section>
+
+<!-- ================= COURSES ================= -->
+<section id="courses" class="view" aria-labelledby="courses-h">
+  <h1 id="courses-h">Our courses</h1>
+  <h2>Six-month programmes</h2>
+  <div class="grid" id="long"></div>
+  <h2 class="section-gap">Six-week short courses</h2>
+  <div class="grid" id="short"></div>
+
+  <h2 class="section-gap">Compare all courses</h2>
+  <div class="table-wrap">
+    <table id="compare">
+      <caption>All seven courses at a glance</caption>
+      <thead><tr><th scope="col">Course</th><th scope="col">Type</th><th scope="col">Duration</th><th scope="col" class="r">Fee</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ================= COURSE DETAIL (filled by script) ================= -->
+<section id="detail" class="view"></section>
+
+<!-- ================= CALCULATE FEES ================= -->
+<section id="fees" class="view" aria-labelledby="fees-h">
+  <h1 id="fees-h">Calculate total fees</h1>
+  <p>Tell us who you are, tick the courses you want, and we'll show a quote. This is a quote only, not an invoice.</p>
+
+  <form id="quote-form" novalidate>
+    <div class="two">
+      <div>
+        <label for="nm">Name</label>
+        <input type="text" id="nm" autocomplete="name" maxlength="60" aria-describedby="nm-err">
+        <p class="field-err" id="nm-err"></p>
+
+        <label for="ph">Phone number</label>
+        <input type="tel" id="ph" placeholder="0821234567" autocomplete="tel" maxlength="20" aria-describedby="ph-hint ph-err">
+        <p class="hint" id="ph-hint">South African number, for example 082 123 4567 or +27 82 123 4567.</p>
+        <p class="field-err" id="ph-err"></p>
+
+        <label for="em">Email address</label>
+        <input type="email" id="em" autocomplete="email" maxlength="80" aria-describedby="em-err">
+        <p class="field-err" id="em-err"></p>
+
+        <label for="intake">Preferred intake</label>
+        <select id="intake" aria-describedby="intake-err">
+          <option value="">Choose an intake</option>
+          <option>January</option><option>April</option><option>July</option><option>October</option>
+        </select>
+        <p class="field-err" id="intake-err"></p>
+      </div>
+
+      <div>
+        <fieldset id="picks-set" aria-describedby="picks-err">
+          <legend>Select courses</legend>
+          <div class="chk-list" id="picks"></div>
+        </fieldset>
+        <p class="field-err" id="picks-err"></p>
+
+        <div class="table-wrap">
+          <table>
+            <caption>Multi-course discounts</caption>
+            <thead><tr><th scope="col">Courses chosen</th><th scope="col" class="r">Discount</th></tr></thead>
+            <tbody id="tiers"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <p><button class="btn" id="calc" type="submit">Calculate total</button></p>
+  </form>
+
+  <div id="msg" aria-live="polite"></div>
+  <div id="result"></div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact" class="view" aria-labelledby="contact-h">
+  <h1 id="contact-h">Contact us</h1>
+  <div class="two">
+    <div>
+      <h2 class="sub">Get in touch</h2>
+      <p><strong>Phone:</strong> <a href="tel:+27310000000">031&nbsp;000&nbsp;0000</a><br><strong>Email:</strong> <a href="mailto:info@pawsitivepet.example">info@pawsitivepet.example</a></p>
+      <p><strong>Social:</strong> <a href="https://www.facebook.com/" target="_blank" rel="noopener">Facebook</a> &middot; <a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a> &middot; <a href="https://www.tiktok.com/" target="_blank" rel="noopener">TikTok</a></p>
+      <h2 class="sub">Venue</h2>
+      <p>Pawsitive Pet Academy<br>[Street address], Durban, KwaZulu-Natal</p>
+      <h2 class="sub">Office hours</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Day</th><th scope="col">Hours</th></tr></thead>
+          <tbody>
+            <tr><td>Monday to Friday</td><td>08:00 to 17:00</td></tr>
+            <tr><td>Saturday</td><td>08:00 to 12:00</td></tr>
+            <tr><td>Sunday and public holidays</td><td>Closed</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <iframe title="Map of Durban" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=30.95%2C-29.92%2C31.10%2C-29.80&amp;layer=mapnik"></iframe>
+  </div>
+</section>
+</main>
+
+<footer>&copy; <span id="year">2026</span> Pawsitive Pet Academy &middot; Durban, South Africa</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>
