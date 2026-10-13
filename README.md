@@ -2,10 +2,8 @@
 
 A responsive website for **Pawsitive Pet Academy**, a Durban-based pet care and training academy. Built by [Group name] for XHAW5112, Task 3 (Phase 1: Website CSS and JavaScript).
 
-**Live site:** https://nehaharipasath.github.io/XHAW_FINAL_WEBSITE_ST10512418/
-**Wireframes (Figma):** [Figma link]
-**Mobile app repository:** [Mobile app GitHub link]
-**Video demo (YouTube, unlisted):** [YouTube link]
+
+
 
 ## Pages
 
@@ -93,15 +91,11 @@ Checked before submission:
 
 ## Team
 
-| Name | ST number | GitHub username | Role |
-|---|---|---|---|
-| [Name] | [ST number] | [username] | [Role] |
-| [Name] | [ST number] | [username] | [Role] |
-| [Name] | [ST number] | [username] | [Role] |
-| [Name] | [ST number] | [username] | [Role] |
+| Name              ST number | GitHub username 
+|---|                  ---|            ---|
+| Neha Haripasath | ST10512418 | nehaharipasath |
+| Sivanesan Rasen | ST10514044 | sivanesanrasen | 
+| Haylee Alexander |ST10504600| hayleealexander | 
 
-## Known limitations
 
-- Quote requests are held in memory only (the `enquiries` array). There is no back end.
-- Contact details, office hours and the venue address are placeholders.
-- Course images are emoji stand-ins for real photos.
+
