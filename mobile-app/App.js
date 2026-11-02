@@ -17,7 +17,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 // ---------- 1. Data and helpers ----------
 const C = {
-  deep: '#0B5E5E', teal: '#0F7C7C', coral: '#F4A259', cream: '#FAF6F0', ink: '#2F2F2F',
+  deep: '#0B5E5E', teal: '#0F7C7C', coral: '#F4A259', coralDark: '#E58A3A', cream: '#FAF6F0', ink: '#2F2F2F',
   line: '#E4DCCF', muted: '#555555', error: '#C0392B', errorBg: '#FDE8E4', errorInk: '#7A1F14', okBg: '#E3F4EE',
 };
 
@@ -333,18 +333,48 @@ function Main() {
 
   // ----- Screens (render functions, so text boxes keep focus while typing) -----
   const home = () => (<>
-    <Photo src="hero" label="A chocolate Labrador sitting outdoors in autumn" />
-    <H1>Practical pet care skills, taught with heart</H1>
-    <Text style={s.lead}>Six-month programmes and six-week short courses in Durban.</Text>
+    {/* Photo with a soft coral shape behind it and two floating labels */}
+    <View style={s.art}>
+      <View style={s.blob} />
+      <Ionicons name="paw" size={30} color={C.coral} style={s.pawDeco} importantForAccessibility="no" />
+      <View style={s.heroPhoto} accessible accessibilityRole="image" accessibilityLabel="A chocolate Labrador sitting outdoors in autumn">
+        <Image source={PHOTOS.hero} style={s.photoImg} resizeMode="cover" />
+      </View>
+      <View style={s.chip}>
+        <View style={s.chipDot}><Ionicons name="paw" size={14} color={C.deep} /></View>
+        <Text style={s.chipT}>Short courses from <Text style={s.chipStrong}>R750</Text></Text>
+      </View>
+      <View style={s.saveCard}>
+        <Text style={s.saveT}>Save up to 15%</Text>
+        <Text style={s.saveS}>when you combine courses</Text>
+      </View>
+    </View>
+
+    <View style={s.eyebrow}><View style={s.eyebrowDot} /><Text style={s.eyebrowT}>Pet care academy · Durban</Text></View>
+    <Text style={s.homeH1} accessibilityRole="header">
+      Practical pet care skills,{'\n'}<Text style={s.homeEm}>taught with heart</Text>
+    </Text>
+    <Text style={s.lead}>Six-month programmes and six-week short courses for pet owners, walkers and future pet professionals.</Text>
     <CourseFinder onOpen={() => setCourseMenu(true)} />
-    <Btn title="Get a quote" onPress={() => go('fees')} />
-    <TouchableOpacity onPress={() => go('courses')} accessibilityRole="link" style={s.linkRow}>
-      <Text style={s.more}>Browse all courses ›</Text>
-    </TouchableOpacity>
-    <View style={s.facts} accessible accessibilityLabel="7 courses. 6 months or 6 weeks. Save up to 15 percent.">
-      <View style={s.fact}><Text style={s.factN}>7</Text><Text style={s.factL}>courses</Text></View>
-      <View style={s.fact}><Text style={s.factN}>6m / 6w</Text><Text style={s.factL}>course lengths</Text></View>
-      <View style={s.fact}><Text style={s.factN}>15%</Text><Text style={s.factL}>max saving</Text></View>
+
+    <View style={s.homeLinks}>
+      <TouchableOpacity onPress={() => go('courses')} accessibilityRole="link" style={s.pill} activeOpacity={0.7}>
+        <Text style={s.pillT}>Browse all courses</Text>
+        <Ionicons name="arrow-forward" size={16} color={C.deep} />
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => go('fees')} accessibilityRole="link" style={s.textLink}>
+        <Text style={s.textLinkT}>Get a quote</Text>
+      </TouchableOpacity>
+    </View>
+
+    <View style={s.facts}>
+      {[['list', '7', 'courses to choose from'], ['time-outline', '6 mo · 6 wk', 'programme or short course'], ['pricetag-outline', '15%', 'VAT included in every quote']].map(([ic, n, l]) => (
+        <View key={n} style={s.fact} accessible accessibilityLabel={`${n}, ${l}`}>
+          <View style={s.factIc}><Ionicons name={ic} size={18} color={C.coralDark} /></View>
+          <Text style={s.factN}>{n}</Text>
+          <Text style={s.factL}>{l}</Text>
+        </View>
+      ))}
     </View>
   </>);
 
@@ -539,14 +569,38 @@ const s = StyleSheet.create({
   backLink: { color: C.teal, fontWeight: '700', fontSize: 15, paddingVertical: 6, marginBottom: 6 },
   photo: { width: '100%', aspectRatio: 3 / 2, borderRadius: 16, overflow: 'hidden', backgroundColor: C.line },
   photoImg: { width: '100%', height: '100%' },
-  lead: { fontSize: 16, color: C.muted, lineHeight: 23, marginBottom: 14 },
-  finder: { backgroundColor: '#FFFFFF', borderWidth: 1, borderColor: C.line, borderRadius: 12, padding: 12, marginBottom: 2 },
-  finderL: { fontWeight: '700', color: C.ink, marginBottom: 6, fontSize: 15 },
-  linkRow: { alignItems: 'center', paddingVertical: 12 },
-  facts: { flexDirection: 'row', borderTopWidth: 1, borderTopColor: C.line, marginTop: 8, paddingTop: 14 },
-  fact: { flex: 1, alignItems: 'center' },
-  factN: { fontSize: 18, fontWeight: '700', color: C.deep },
-  factL: { fontSize: 12, color: C.muted, marginTop: 2 },
+  lead: { fontSize: 16, color: C.muted, lineHeight: 24, marginBottom: 18 },
+  finder: { backgroundColor: '#FFFFFF', borderRadius: 18, padding: 14, marginBottom: 2, shadowColor: C.deep, shadowOpacity: 0.12, shadowRadius: 16, shadowOffset: { width: 0, height: 8 }, elevation: 4 },
+  finderL: { fontWeight: '700', color: C.muted, marginBottom: 8, fontSize: 12, letterSpacing: 1, textTransform: 'uppercase' },
+  // Home: photo area
+  art: { marginTop: 8, paddingTop: 14, paddingLeft: 14, paddingBottom: 18 },
+  blob: { position: 'absolute', top: 4, left: 0, right: '12%', bottom: 0, backgroundColor: C.coral, opacity: 0.4, borderTopLeftRadius: 140, borderTopRightRadius: 110, borderBottomLeftRadius: 120, borderBottomRightRadius: 150 },
+  pawDeco: { position: 'absolute', top: -6, right: 4, opacity: 0.35, transform: [{ rotate: '25deg' }] },
+  heroPhoto: { width: '100%', aspectRatio: 4 / 3, overflow: 'hidden', backgroundColor: C.line, borderTopLeftRadius: 130, borderTopRightRadius: 130, borderBottomLeftRadius: 22, borderBottomRightRadius: 22 },
+  chip: { position: 'absolute', top: 28, right: 2, flexDirection: 'row', alignItems: 'center', backgroundColor: C.deep, borderRadius: 999, paddingVertical: 6, paddingLeft: 6, paddingRight: 12, shadowColor: C.deep, shadowOpacity: 0.3, shadowRadius: 12, shadowOffset: { width: 0, height: 6 }, elevation: 6 },
+  chipDot: { width: 24, height: 24, borderRadius: 12, backgroundColor: C.coral, alignItems: 'center', justifyContent: 'center', marginRight: 8 },
+  chipT: { color: '#FFFFFF', fontSize: 12.5 },
+  chipStrong: { color: C.coral, fontWeight: '700' },
+  saveCard: { position: 'absolute', left: 0, bottom: 28, backgroundColor: '#FFFFFF', borderLeftWidth: 4, borderLeftColor: C.coral, borderRadius: 14, paddingVertical: 8, paddingHorizontal: 12, shadowColor: '#000000', shadowOpacity: 0.14, shadowRadius: 12, shadowOffset: { width: 0, height: 6 }, elevation: 6 },
+  saveT: { color: C.deep, fontWeight: '700', fontSize: 15 },
+  saveS: { color: C.muted, fontSize: 12 },
+  // Home: text
+  eyebrow: { alignSelf: 'flex-start', flexDirection: 'row', alignItems: 'center', backgroundColor: '#FFFFFF', borderWidth: 1, borderColor: C.line, borderRadius: 999, paddingVertical: 5, paddingHorizontal: 12, marginTop: 8 },
+  eyebrowDot: { width: 7, height: 7, borderRadius: 4, backgroundColor: C.coral, marginRight: 7 },
+  eyebrowT: { color: C.teal, fontWeight: '700', fontSize: 12.5 },
+  homeH1: { fontSize: 28, fontWeight: '700', color: C.deep, lineHeight: 34, marginTop: 14, marginBottom: 12 },
+  homeEm: { fontFamily: Platform.select({ ios: 'Georgia', android: 'serif', default: 'Georgia, serif' }), fontStyle: 'italic', fontWeight: '400', color: C.coralDark, fontSize: 30 },
+  homeLinks: { flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', marginTop: 16 },
+  pill: { flexDirection: 'row', alignItems: 'center', borderWidth: 2, borderColor: C.deep, borderRadius: 999, paddingHorizontal: 16, minHeight: 46, marginRight: 18 },
+  pillT: { color: C.deep, fontWeight: '700', fontSize: 15, marginRight: 6 },
+  textLink: { minHeight: 46, justifyContent: 'center' },
+  textLinkT: { color: C.teal, fontWeight: '700', fontSize: 15, textDecorationLine: 'underline' },
+  // Home: key facts
+  facts: { flexDirection: 'row', marginTop: 22, marginHorizontal: -4 },
+  fact: { flex: 1, alignItems: 'center', backgroundColor: '#FFFFFF', borderRadius: 14, paddingVertical: 12, paddingHorizontal: 4, marginHorizontal: 4, shadowColor: C.deep, shadowOpacity: 0.06, shadowRadius: 8, shadowOffset: { width: 0, height: 3 }, elevation: 1 },
+  factIc: { width: 32, height: 32, borderRadius: 10, backgroundColor: C.cream, alignItems: 'center', justifyContent: 'center', marginBottom: 6 },
+  factN: { fontSize: 17, fontWeight: '700', color: C.deep },
+  factL: { fontSize: 11.5, color: C.muted, marginTop: 2, textAlign: 'center', lineHeight: 15 },
   card: { backgroundColor: '#FFFFFF', borderWidth: 1, borderColor: C.line, borderRadius: 12, padding: 14, marginTop: 12 },
   tag: { alignSelf: 'flex-start', fontSize: 12, fontWeight: '700', color: C.deep, backgroundColor: C.cream, borderColor: C.line, borderWidth: 1, borderRadius: 999, paddingHorizontal: 10, paddingVertical: 2, marginTop: 4, overflow: 'hidden' },
   tagWarm: { backgroundColor: '#FDF0E2', color: '#8A4A12' },
