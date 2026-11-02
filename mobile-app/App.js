@@ -6,6 +6,7 @@ import {
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { WebView } from 'react-native-webview';
+import { Ionicons } from '@expo/vector-icons';
 
 /* =========================================================
    Pawsitive Pet Academy: mobile app
@@ -22,19 +23,32 @@ const C = {
 
 // Array of course objects (same data as the website)
 const courses = [
-  { n: 'Canine Obedience Training', fee: 1500, t: 'long', e: '🐕', p: 'To teach effective dog obedience and behavioural training techniques.', c: ['Basic commands', 'Leash training', 'Behaviour correction', 'Positive reinforcement', 'Socialisation techniques'] },
-  { n: 'Pet Grooming', fee: 1500, t: 'long', e: '✂️', p: 'To provide professional grooming skills for domestic pets.', c: ['Coat care', 'Bathing techniques', 'Nail trimming', 'Ear and eye cleaning', 'Grooming equipment'] },
-  { n: 'Animal Behaviour', fee: 1500, t: 'long', e: '🐈', p: 'To understand common pet behaviours and improve communication with animals.', c: ['Animal psychology', 'Reading body language', 'Stress management', 'Behaviour modification', 'Enrichment activities'] },
-  { n: 'Pet Business Management', fee: 1500, t: 'long', e: '💼', p: 'To prepare learners to operate a successful pet-related business.', c: ['Customer service', 'Marketing', 'Business planning', 'Financial management', 'Legal requirements'] },
-  { n: 'Puppy Care', fee: 750, t: 'short', e: '🐶', p: 'To provide new puppy owners with essential care knowledge.', c: ['Feeding', 'Vaccinations', 'Toilet training', 'Exercise', 'Socialisation'] },
-  { n: 'Pet First Aid', fee: 750, t: 'short', e: '🩹', p: 'To provide emergency first aid knowledge for pets.', c: ['Minor injuries', 'CPR basics', 'Poison awareness', 'Heatstroke', 'Emergency transport'] },
-  { n: 'Basic Dog Walking', fee: 750, t: 'short', e: '🦮', p: 'To teach safe and professional dog walking practices.', c: ['Walking equipment', 'Handling multiple dogs', 'Safety procedures', 'Exercise routines'] },
+  { n: 'Canine Obedience Training', fee: 1500, t: 'long', img: 'obedience', alt: 'An alert brown Australian Shepherd', p: 'To teach effective dog obedience and behavioural training techniques.', c: ['Basic commands', 'Leash training', 'Behaviour correction', 'Positive reinforcement', 'Socialisation techniques'] },
+  { n: 'Pet Grooming', fee: 1500, t: 'long', img: 'grooming', alt: 'A fluffy cream-coloured dog', p: 'To provide professional grooming skills for domestic pets.', c: ['Coat care', 'Bathing techniques', 'Nail trimming', 'Ear and eye cleaning', 'Grooming equipment'] },
+  { n: 'Animal Behaviour', fee: 1500, t: 'long', img: 'behaviour', alt: 'A black and white cat resting on a rock', p: 'To understand common pet behaviours and improve communication with animals.', c: ['Animal psychology', 'Reading body language', 'Stress management', 'Behaviour modification', 'Enrichment activities'] },
+  { n: 'Pet Business Management', fee: 1500, t: 'long', img: 'business', alt: 'A brown Vizsla portrait', p: 'To prepare learners to operate a successful pet-related business.', c: ['Customer service', 'Marketing', 'Business planning', 'Financial management', 'Legal requirements'] },
+  { n: 'Puppy Care', fee: 750, t: 'short', img: 'puppy', alt: 'An Australian Shepherd puppy in purple flowers', p: 'To provide new puppy owners with essential care knowledge.', c: ['Feeding', 'Vaccinations', 'Toilet training', 'Exercise', 'Socialisation'] },
+  { n: 'Pet First Aid', fee: 750, t: 'short', img: 'first-aid', alt: 'A calico cat on fresh snow', p: 'To provide emergency first aid knowledge for pets.', c: ['Minor injuries', 'CPR basics', 'Poison awareness', 'Heatstroke', 'Emergency transport'] },
+  { n: 'Basic Dog Walking', fee: 750, t: 'short', img: 'walking', alt: 'A red setter on a forest path', p: 'To teach safe and professional dog walking practices.', c: ['Walking equipment', 'Handling multiple dogs', 'Safety procedures', 'Exercise routines'] },
 ];
 const TYPE_LABEL = { long: 'Six-month programme', short: 'Six-week short course' };
 const intakes = ['January', 'April', 'July', 'October'];
 const TIERS = [[1, 0], [2, 5], [3, 10], [4, 15]];   // [minimum courses, % discount]
 const VAT_RATE = 15;
-const tabs = [['home', 'Home', '🏠'], ['about', 'About', 'ℹ️'], ['courses', 'Courses', '📚'], ['fees', 'Fees', '🧮'], ['contact', 'Contact', '📞']];
+const tabs = [['home', 'Home', 'home'], ['about', 'About', 'information-circle'], ['courses', 'Courses', 'school'], ['fees', 'Fees', 'calculator'], ['contact', 'Contact', 'call']];
+
+// Real photos (Pixabay licence), bundled with the app so they work offline
+const PHOTOS = {
+  hero: require('./assets/photos/hero.jpg'),
+  about: require('./assets/photos/about.jpg'),
+  obedience: require('./assets/photos/obedience.jpg'),
+  grooming: require('./assets/photos/grooming.jpg'),
+  behaviour: require('./assets/photos/behaviour.jpg'),
+  business: require('./assets/photos/business.jpg'),
+  puppy: require('./assets/photos/puppy.jpg'),
+  'first-aid': require('./assets/photos/first-aid.jpg'),
+  walking: require('./assets/photos/walking.jpg'),
+};
 const MAP_URL = 'https://www.openstreetmap.org/export/embed.html?bbox=30.95%2C-29.92%2C31.10%2C-29.80&layer=mapnik';
 
 // Money is kept in whole cents so every line of the quote adds up exactly.
@@ -91,9 +105,20 @@ const FIELD_LABEL = { name: 'Name', phone: 'Phone number', email: 'Email address
 
 // ---------- 3. Small components (defined outside App so they keep their state) ----------
 const Card = ({ children, style }) => <View style={[s.card, style]}>{children}</View>;
-const Hero = ({ e, warm, label }) => (
-  <View style={[s.pic, warm && s.picWarm]} accessible accessibilityRole="image" accessibilityLabel={label}>
-    <Text style={s.picE}>{e}</Text>
+const Photo = ({ src, label, style }) => (
+  <View style={[s.photo, style]} accessible accessibilityRole="image" accessibilityLabel={label}>
+    <Image source={PHOTOS[src]} style={s.photoImg} resizeMode="cover" />
+  </View>
+);
+
+// Course drop-down button (opens the course list)
+const CourseFinder = ({ onOpen }) => (
+  <View style={s.finder}>
+    <Text style={s.finderL}>Find a course</Text>
+    <TouchableOpacity style={[s.input, s.select]} onPress={onOpen} accessibilityRole="combobox" accessibilityLabel="Find a course" accessibilityHint="Opens a list of all seven courses">
+      <Text style={s.placeholder}>Choose a course</Text>
+      <Ionicons name="chevron-down" size={18} color={C.deep} />
+    </TouchableOpacity>
   </View>
 );
 const Btn = ({ title, onPress, alt, label }) => (
@@ -239,6 +264,7 @@ function Main() {
   const [form, setForm] = useState({ name: '', phone: '', email: '', intake: '' });
   const [fieldErr, setFieldErr] = useState({});
   const [menu, setMenu] = useState(false);           // intake drop-down visibility
+  const [courseMenu, setCourseMenu] = useState(false); // course drop-down visibility
   const [errors, setErrors] = useState([]);
   const [quote, setQuote] = useState(null);
   const [done, setDone] = useState('');
@@ -254,6 +280,7 @@ function Main() {
   useEffect(() => {
     const sub = BackHandler.addEventListener('hardwareBackPress', () => {
       if (menu) { setMenu(false); return true; }
+      if (courseMenu) { setCourseMenu(false); return true; }
       if (screen === 'detail') { go('courses'); return true; }
       if (screen !== 'home') { go('home'); return true; }
       return false;
@@ -306,26 +333,24 @@ function Main() {
 
   // ----- Screens (render functions, so text boxes keep focus while typing) -----
   const home = () => (<>
-    <Hero e="🐕🐾" label="Dog and paw prints" />
+    <Photo src="hero" label="A chocolate Labrador sitting outdoors in autumn" />
     <H1>Practical pet care skills, taught with heart</H1>
-    <Text style={s.p}>Pawsitive Pet Academy in Durban teaches pet owners, pet sitters, kennel staff and aspiring professionals how to care for, train and work with animals. Choose a six-month programme or a six-week short course.</Text>
-    <Btn title="Browse courses" onPress={() => go('courses')} />
-    <Btn title="Get a quote" alt onPress={() => go('fees')} />
-    <H2 style={s.gap}>Where would you like to start?</H2>
-    <TouchableOpacity onPress={() => go('courses')} accessibilityRole="button" activeOpacity={0.8}>
-      <Card><Text style={s.cardE}>🎓</Text><Text style={s.h3}>Six-month programmes</Text><Text style={s.p}>Canine Obedience, Pet Grooming, Animal Behaviour and Pet Business Management.</Text><Text style={s.more}>See the programmes ›</Text></Card>
+    <Text style={s.lead}>Six-month programmes and six-week short courses in Durban.</Text>
+    <CourseFinder onOpen={() => setCourseMenu(true)} />
+    <Btn title="Get a quote" onPress={() => go('fees')} />
+    <TouchableOpacity onPress={() => go('courses')} accessibilityRole="link" style={s.linkRow}>
+      <Text style={s.more}>Browse all courses ›</Text>
     </TouchableOpacity>
-    <TouchableOpacity onPress={() => go('courses')} accessibilityRole="button" activeOpacity={0.8}>
-      <Card><Text style={s.cardE}>🩶</Text><Text style={s.h3}>Six-week short courses</Text><Text style={s.p}>Puppy Care, Pet First Aid and Basic Dog Walking.</Text><Text style={s.more}>See the short courses ›</Text></Card>
-    </TouchableOpacity>
-    <TouchableOpacity onPress={() => go('fees')} accessibilityRole="button" activeOpacity={0.8}>
-      <Card><Text style={s.cardE}>💰</Text><Text style={s.h3}>Save when you combine</Text><Text style={s.p}>Two courses save 5%, three save 10%, and more than three save 15%.</Text><Text style={s.more}>Calculate your fees ›</Text></Card>
-    </TouchableOpacity>
+    <View style={s.facts} accessible accessibilityLabel="7 courses. 6 months or 6 weeks. Save up to 15 percent.">
+      <View style={s.fact}><Text style={s.factN}>7</Text><Text style={s.factL}>courses</Text></View>
+      <View style={s.fact}><Text style={s.factN}>6m / 6w</Text><Text style={s.factL}>course lengths</Text></View>
+      <View style={s.fact}><Text style={s.factN}>15%</Text><Text style={s.factL}>max saving</Text></View>
+    </View>
   </>);
 
   const about = () => (<>
     <H1>About us</H1>
-    <Hero e="🐈🐶" warm label="Cat and dog" />
+    <Photo src="about" label="A red setter sitting in a meadow of flowers" />
     <Card>
       <H2 style={s.noTop}>Our history</H2>
       <Text style={s.p}>Pawsitive Pet Academy was established in 2023 by Sarah Smith and offers training courses in Durban. Hundreds of pet owners and aspiring pet care professionals have completed our six-month Professional Development Programmes and six-week Practical Skills Courses.</Text>
@@ -338,7 +363,7 @@ function Main() {
 
   const list = (t) => courses.map((c, i) => (c.t !== t ? null : (
     <TouchableOpacity key={c.n} style={s.row} onPress={() => go('detail', i)} accessibilityRole="button" accessibilityLabel={`${c.n}, ${rand(c.fee)}. View details`} activeOpacity={0.8}>
-      <View style={[s.rowPic, t === 'short' && s.picWarm]}><Text style={s.rowE}>{c.e}</Text></View>
+      <Image source={PHOTOS[c.img]} style={s.rowPic} accessibilityLabel={c.alt} />
       <View style={s.rowBody}>
         <Text style={s.rowT}>{c.n}</Text>
         <Text style={s.fee}>{rand(c.fee)}</Text>
@@ -350,6 +375,7 @@ function Main() {
 
   const coursesScreen = () => (<>
     <H1>Our courses</H1>
+    <CourseFinder onOpen={() => setCourseMenu(true)} />
     <H2>Six-month programmes</H2>{list('long')}
     <H2 style={s.gap}>Six-week short courses</H2>{list('short')}
     <H2 style={s.gap}>Compare all courses</H2>
@@ -360,7 +386,7 @@ function Main() {
     const c = courses[cur]; const on = selected.includes(cur);
     return (<>
       <TouchableOpacity onPress={() => go('courses')} accessibilityRole="link"><Text style={s.backLink}>‹ All courses</Text></TouchableOpacity>
-      <Hero e={c.e} warm={c.t === 'short'} label={c.n} />
+      <Photo src={c.img} label={c.alt} />
       <H1>{c.n}</H1>
       <Text style={[s.tag, c.t === 'short' && s.tagWarm]}>{TYPE_LABEL[c.t]}</Text>
       <Text style={[s.fee, s.feeBig]}>Course fee: {rand(c.fee)}</Text>
@@ -387,7 +413,7 @@ function Main() {
     </Card>
     <Card>
       <Text style={s.h3}>Venue</Text>
-      <Text style={s.p}>Pawsitive Pet Academy{'\n'}[Street address], Durban, KwaZulu-Natal</Text>
+      <Text style={s.p}>Pawsitive Pet Academy{'\n'}24 Paw Lane, Morningside{'\n'}Durban, KwaZulu-Natal, 4001</Text>
     </Card>
     <H2 style={s.gap}>Office hours</H2>
     <Table head={['Day', 'Hours']} rows={[['Monday to Friday', '08:00 to 17:00'], ['Saturday', '08:00 to 12:00'], ['Sunday and public holidays', 'Closed']]} />
@@ -430,7 +456,7 @@ function Main() {
             <TouchableOpacity key={k} style={s.tab} onPress={() => go(k)} accessibilityRole="tab" aria-selected={on}
               accessibilityLabel={k === 'fees' && selected.length ? `${l}, ${selected.length} courses selected` : l}>
               <View>
-                <Text style={s.tabI}>{ic}</Text>
+                <Ionicons name={on ? ic : `${ic}-outline`} size={22} color={on ? C.deep : '#777777'} style={s.tabI} />
                 {k === 'fees' && selected.length > 0 && <View style={s.badge}><Text style={s.badgeT}>{selected.length}</Text></View>}
               </View>
               <Text style={[s.tabT, on && s.tabOn]}>{l}</Text>
@@ -454,6 +480,27 @@ function Main() {
                 </TouchableOpacity>
               );
             })}
+          </View>
+        </TouchableOpacity>
+      </Modal>
+
+      {/* Course drop-down: every course, grouped by type */}
+      <Modal visible={courseMenu} transparent animationType="fade" onRequestClose={() => setCourseMenu(false)}>
+        <TouchableOpacity style={s.overlay} activeOpacity={1} onPress={() => setCourseMenu(false)} accessibilityLabel="Close course list">
+          <View style={s.sheet}>
+            <Text style={s.sheetH} accessibilityRole="header">Choose a course</Text>
+            {[['long', 'Six-month programmes'], ['short', 'Six-week short courses']].map(([t, label]) => (
+              <View key={t}>
+                <Text style={s.sheetGroup}>{label}</Text>
+                {courses.map((c, i) => (c.t !== t ? null : (
+                  <TouchableOpacity key={c.n} style={s.optCourse} onPress={() => { setCourseMenu(false); go('detail', i); }} accessibilityRole="button" accessibilityLabel={`${c.n}, ${rand(c.fee)}`}>
+                    <Image source={PHOTOS[c.img]} style={s.optThumb} />
+                    <Text style={s.optCourseT}>{c.n}</Text>
+                    <Text style={s.optFee}>{rand(c.fee)}</Text>
+                  </TouchableOpacity>
+                )))}
+              </View>
+            ))}
           </View>
         </TouchableOpacity>
       </Modal>
@@ -490,11 +537,17 @@ const s = StyleSheet.create({
   feeBig: { fontSize: 16, marginTop: 8 },
   more: { color: C.teal, fontWeight: '700', marginTop: 2 },
   backLink: { color: C.teal, fontWeight: '700', fontSize: 15, paddingVertical: 6, marginBottom: 6 },
-  pic: { backgroundColor: C.teal, borderRadius: 16, height: 150, alignItems: 'center', justifyContent: 'center' },
-  picWarm: { backgroundColor: C.coral },
-  picE: { fontSize: 48 },
+  photo: { width: '100%', aspectRatio: 3 / 2, borderRadius: 16, overflow: 'hidden', backgroundColor: C.line },
+  photoImg: { width: '100%', height: '100%' },
+  lead: { fontSize: 16, color: C.muted, lineHeight: 23, marginBottom: 14 },
+  finder: { backgroundColor: '#FFFFFF', borderWidth: 1, borderColor: C.line, borderRadius: 12, padding: 12, marginBottom: 2 },
+  finderL: { fontWeight: '700', color: C.ink, marginBottom: 6, fontSize: 15 },
+  linkRow: { alignItems: 'center', paddingVertical: 12 },
+  facts: { flexDirection: 'row', borderTopWidth: 1, borderTopColor: C.line, marginTop: 8, paddingTop: 14 },
+  fact: { flex: 1, alignItems: 'center' },
+  factN: { fontSize: 18, fontWeight: '700', color: C.deep },
+  factL: { fontSize: 12, color: C.muted, marginTop: 2 },
   card: { backgroundColor: '#FFFFFF', borderWidth: 1, borderColor: C.line, borderRadius: 12, padding: 14, marginTop: 12 },
-  cardE: { fontSize: 28, marginBottom: 6 },
   tag: { alignSelf: 'flex-start', fontSize: 12, fontWeight: '700', color: C.deep, backgroundColor: C.cream, borderColor: C.line, borderWidth: 1, borderRadius: 999, paddingHorizontal: 10, paddingVertical: 2, marginTop: 4, overflow: 'hidden' },
   tagWarm: { backgroundColor: '#FDF0E2', color: '#8A4A12' },
   btn: { backgroundColor: C.coral, borderRadius: 10, paddingVertical: 14, paddingHorizontal: 12, alignItems: 'center', marginTop: 12, minHeight: 48, justifyContent: 'center' },
@@ -502,9 +555,8 @@ const s = StyleSheet.create({
   btnT: { fontWeight: '700', color: '#1D1D1D', fontSize: 15, textAlign: 'center' },
   btnTAlt: { color: '#FFFFFF' },
   row: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#FFFFFF', borderWidth: 1, borderColor: C.line, borderRadius: 12, padding: 12, marginTop: 8 },
-  rowPic: { width: 52, height: 52, borderRadius: 10, backgroundColor: C.teal, alignItems: 'center', justifyContent: 'center' },
-  rowE: { fontSize: 26 },
-  rowBody: { flex: 1, marginLeft: 12 },
+  rowPic: { width: 64, height: 64, borderRadius: 10, backgroundColor: C.line },
+  rowBody: { flex: 1, marginLeft: 12, marginRight: 8 },
   rowT: { fontSize: 16, fontWeight: '700', color: C.ink },
   lbl: { fontWeight: '700', color: C.ink, marginTop: 14, marginBottom: 4, fontSize: 15 },
   input: { backgroundColor: '#FFFFFF', borderWidth: 2, borderColor: C.line, borderRadius: 8, paddingHorizontal: 12, paddingVertical: 11, fontSize: 15, color: C.ink, minHeight: 48 },
@@ -538,7 +590,7 @@ const s = StyleSheet.create({
   map: { height: 260, borderRadius: 12, overflow: 'hidden', marginTop: 4, borderWidth: 1, borderColor: C.line },
   tabs: { flexDirection: 'row', backgroundColor: '#FFFFFF', borderTopWidth: 1, borderTopColor: C.line, paddingTop: 6 },
   tab: { flex: 1, alignItems: 'center', paddingVertical: 4, minHeight: 48 },
-  tabI: { fontSize: 20, textAlign: 'center' },
+  tabI: { textAlign: 'center' },
   tabT: { fontSize: 11, color: '#666666', marginTop: 2 },
   tabOn: { color: C.deep, fontWeight: '700' },
   badge: { position: 'absolute', top: -4, right: -12, minWidth: 18, height: 18, borderRadius: 9, backgroundColor: C.coral, alignItems: 'center', justifyContent: 'center', paddingHorizontal: 4 },
@@ -550,4 +602,9 @@ const s = StyleSheet.create({
   optOn: { backgroundColor: C.cream },
   optT: { fontSize: 16, color: C.ink },
   optTick: { color: C.teal, fontWeight: '700', fontSize: 16 },
+  sheetGroup: { fontSize: 12, fontWeight: '700', color: C.muted, textTransform: 'uppercase', letterSpacing: 0.5, paddingHorizontal: 16, paddingTop: 12, paddingBottom: 4 },
+  optCourse: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 16, paddingVertical: 8, minHeight: 52 },
+  optThumb: { width: 40, height: 40, borderRadius: 8, marginRight: 12, backgroundColor: C.line },
+  optCourseT: { flex: 1, fontSize: 15, color: C.ink },
+  optFee: { fontSize: 13, color: C.deep, fontWeight: '700' },
 });

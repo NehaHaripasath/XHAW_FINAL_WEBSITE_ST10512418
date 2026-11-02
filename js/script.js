@@ -9,13 +9,13 @@
 
 /* ---------- 1. Course data (same as the mobile app) ---------- */
 const courses = [
-  {n:"Canine Obedience Training", fee:1500, t:"long",  e:"\u{1F415}", p:"To teach effective dog obedience and behavioural training techniques.", c:["Basic commands","Leash training","Behaviour correction","Positive reinforcement","Socialisation techniques"]},
-  {n:"Pet Grooming",              fee:1500, t:"long",  e:"✂️", p:"To provide professional grooming skills for domestic pets.", c:["Coat care","Bathing techniques","Nail trimming","Ear and eye cleaning","Grooming equipment"]},
-  {n:"Animal Behaviour",          fee:1500, t:"long",  e:"\u{1F408}", p:"To understand common pet behaviours and improve communication with animals.", c:["Animal psychology","Reading body language","Stress management","Behaviour modification","Enrichment activities"]},
-  {n:"Pet Business Management",   fee:1500, t:"long",  e:"\u{1F4BC}", p:"To prepare learners to operate a successful pet-related business.", c:["Customer service","Marketing","Business planning","Financial management","Legal requirements"]},
-  {n:"Puppy Care",                fee:750,  t:"short", e:"\u{1F436}", p:"To provide new puppy owners with essential care knowledge.", c:["Feeding","Vaccinations","Toilet training","Exercise","Socialisation"]},
-  {n:"Pet First Aid",             fee:750,  t:"short", e:"\u{1FA79}", p:"To provide emergency first aid knowledge for pets.", c:["Minor injuries","CPR basics","Poison awareness","Heatstroke","Emergency transport"]},
-  {n:"Basic Dog Walking",         fee:750,  t:"short", e:"\u{1F9AE}", p:"To teach safe and professional dog walking practices.", c:["Walking equipment","Handling multiple dogs","Safety procedures","Exercise routines"]}
+  {n:"Canine Obedience Training", fee:1500, t:"long",  img:"obedience", alt:"An alert brown Australian Shepherd looking straight at the camera", p:"To teach effective dog obedience and behavioural training techniques.", c:["Basic commands","Leash training","Behaviour correction","Positive reinforcement","Socialisation techniques"]},
+  {n:"Pet Grooming",              fee:1500, t:"long",  img:"grooming", alt:"A fluffy cream-coloured dog with a well-brushed coat", p:"To provide professional grooming skills for domestic pets.", c:["Coat care","Bathing techniques","Nail trimming","Ear and eye cleaning","Grooming equipment"]},
+  {n:"Animal Behaviour",          fee:1500, t:"long",  img:"behaviour", alt:"A black and white cat stretched out on a rock by the water", p:"To understand common pet behaviours and improve communication with animals.", c:["Animal psychology","Reading body language","Stress management","Behaviour modification","Enrichment activities"]},
+  {n:"Pet Business Management",   fee:1500, t:"long",  img:"business", alt:"A brown Vizsla in a calm studio portrait", p:"To prepare learners to operate a successful pet-related business.", c:["Customer service","Marketing","Business planning","Financial management","Legal requirements"]},
+  {n:"Puppy Care",                fee:750,  t:"short", img:"puppy", alt:"A merle Australian Shepherd puppy lying in a field of purple crocuses", p:"To provide new puppy owners with essential care knowledge.", c:["Feeding","Vaccinations","Toilet training","Exercise","Socialisation"]},
+  {n:"Pet First Aid",             fee:750,  t:"short", img:"first-aid", alt:"A calico cat resting on fresh snow", p:"To provide emergency first aid knowledge for pets.", c:["Minor injuries","CPR basics","Poison awareness","Heatstroke","Emergency transport"]},
+  {n:"Basic Dog Walking",         fee:750,  t:"short", img:"walking", alt:"A red setter standing on a forest path", p:"To teach safe and professional dog walking practices.", c:["Walking equipment","Handling multiple dogs","Safety procedures","Exercise routines"]}
 ];
 
 // Discount tiers: [minimum number of courses, percentage off]
@@ -61,9 +61,13 @@ function clearQuote(){ $("result").innerHTML = ""; $("msg").innerHTML = ""; }
 function renderCourseCards(){
   ["long", "short"].forEach(t => {
     $(t).innerHTML = courses.map((c, i) => c.t !== t ? "" :
-      `<div class="card"><div class="pic ${t === "short" ? "warm" : ""}" aria-hidden="true">${c.e}</div>
-       <h3>${c.n}</h3><p class="fee">${rand(c.fee)}</p><p>${c.p}</p>
-       <a href="#course-${i}" aria-label="View details for ${c.n}">View details</a></div>`).join("");
+      `<article class="card course-card">
+         <img class="card-img" src="img/${c.img}.jpg" alt="${c.alt}" width="1200" height="800" loading="lazy">
+         <div class="card-body">
+           <h3>${c.n}</h3><p class="fee">${rand(c.fee)}</p><p class="desc">${c.p}</p>
+           <a class="more" href="#course-${i}" aria-label="View details for ${c.n}">View details &rarr;</a>
+         </div>
+       </article>`).join("");
   });
   $("compare").tBodies[0].innerHTML = courses.map((c, i) =>
     `<tr><td><a href="#course-${i}">${c.n}</a></td><td>${TYPE_LABEL[c.t]}</td>
@@ -87,6 +91,26 @@ function renderTiers(){
   }).join("");
 }
 
+// Home page course finder: a drop-down of every course, grouped by type.
+function renderFinder(){
+  const group = (t, label) => `<optgroup label="${label}">` +
+    courses.map((c, i) => c.t !== t ? "" : `<option value="${i}">${c.n} (${rand(c.fee)})</option>`).join("") + "</optgroup>";
+  $("find").innerHTML = '<option value="">Choose a course</option>' + group("long", "Six-month programmes") + group("short", "Six-week short courses");
+}
+function openFoundCourse(event){
+  event.preventDefault();
+  const v = $("find").value;
+  if (v === ""){
+    $("find-err").textContent = "Choose a course from the drop-down first.";
+    $("find").setAttribute("aria-invalid", "true");
+    $("find").focus();
+    return;
+  }
+  $("find-err").textContent = "";
+  $("find").removeAttribute("aria-invalid");
+  location.hash = "#course-" + v;
+}
+
 function renderDropMenu(){
   const group = (t, title) => `<p class="drop-group" id="grp-${t}">${title}</p><ul aria-labelledby="grp-${t}">` +
     courses.map((c, i) => c.t !== t ? "" : `<li><a class="drop-link" href="#course-${i}" data-course="${i}">${c.n}</a></li>`).join("") + "</ul>";
@@ -106,7 +130,7 @@ function showDetail(i){
     <button class="btn" id="add" type="button" aria-pressed="${on}">${on ? "Remove from my selection" : "Add to my selection"}</button>
     <a class="btn alt" href="#fees">Go to fees</a>
   </div>
-  <div class="pic ${c.t === "short" ? "warm" : ""}" role="img" aria-label="${c.n}">${c.e}</div></div>`;
+  <img class="photo" src="img/${c.img}.jpg" alt="${c.alt}" width="1200" height="800"></div>`;
   $("add").addEventListener("click", () => {
     setSelected(on ? selected.filter(x => x !== i) : [...selected, i]);
     clearQuote();
@@ -327,12 +351,15 @@ function route(event){
 
 /* ---------- 8. Start-up ---------- */
 $("quote-form").addEventListener("submit", calculate);
+$("finder").addEventListener("submit", openFoundCourse);
+$("find").addEventListener("change", () => { if ($("find").value !== ""){ $("find-err").textContent = ""; $("find").removeAttribute("aria-invalid"); } });
 $("skip").addEventListener("click", e => { e.preventDefault(); $("main").focus(); });
 $("year").textContent = new Date().getFullYear();
 renderCourseCards();
 renderPicks();
 renderTiers();
 renderDropMenu();
+renderFinder();
 updateBadge();
 window.addEventListener("hashchange", route);
 route();

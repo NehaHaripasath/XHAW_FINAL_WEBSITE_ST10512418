@@ -6,12 +6,12 @@ Built by [Group name] for XHAW5112, Task 3. It has the same courses, fees, disco
 
 ## Features
 
-- **Home:** short introduction to the academy with links to the course lists and fee calculator.
+- **Home:** a clean start screen with a photo, a one-line introduction, a **Find a course** drop-down, a quote button and three key facts.
 - **About Us:** history, vision, mission and goals.
-- **Courses:** six-month programmes and six-week short courses, each linking to its own page, plus a table comparing all seven courses.
+- **Courses:** a **Find a course** drop-down, six-month programmes and six-week short courses (each with a photo, linking to its own page), plus a table comparing all seven courses.
 - **Course details:** purpose, content and fee for each of the 7 courses, with an add/remove selection button.
 - **Calculate Fees:** contact form, course checkboxes, preferred-intake drop-down, discount table and a quote table. A badge on the Fees tab shows how many courses are selected.
-- **Contact:** tap-to-call, tap-to-email, tappable social links, venue address, office hours table and an embedded map.
+- **Contact:** tap-to-call, tap-to-email, tappable social links, venue address (24 Paw Lane, Morningside, Durban), office hours table and an embedded map.
 
 ## Fee rules
 
@@ -58,6 +58,7 @@ Changing a course selection clears any old quote, so an out-of-date price is nev
 - `react-native-webview` for the map on the Contact screen
 - `react-native-safe-area-context` so the header and tab bar clear the phone's notch and gesture bar
 - `expo-splash-screen` for the branded splash screen
+- `@expo/vector-icons` (Ionicons) for the tab bar and drop-down icons
 - No navigation library: screens are switched with component state and a bottom tab bar; the Android back button returns to the previous screen
 
 ## Project structure
@@ -69,7 +70,7 @@ mobile-app/
 ├── app.json          # Expo app configuration (name, icons, splash)
 ├── package.json      # dependencies and scripts
 ├── package-lock.json
-├── assets/           # logo, app icon, Android icons, splash and favicon
+├── assets/           # logo, app icon, Android icons, splash, favicon and photos/
 ├── .gitignore
 └── README.md
 ```
@@ -120,6 +121,7 @@ The app follows the high-fidelity wireframes designed in Figma: [Figma link]
 - Old quotes are cleared when the course selection changes; the form resets after a consultant request.
 - Added a course comparison table, discount table, office hours table and a selected-courses badge on the Fees tab.
 - Added the paw-and-heart logo, app icons and a branded splash screen.
+- Simplified the home screen, replaced emoji pictures with real photos and added a **Find a course** drop-down on Home and Courses.
 - Added safe-area support for notched phones, Android back-button handling, bigger tap targets and screen-reader labels.
 
 ## Team
@@ -131,11 +133,15 @@ The app follows the high-fidelity wireframes designed in Figma: [Figma link]
 | [Name] | [ST number] | [username] | [Role] |
 | [Name] | [ST number] | [username] | [Role] |
 
-## Known limitations
+## Future improvements
 
-- Quote requests are stored in memory only and are cleared when the app closes. There is no back end yet.
-- Contact details and the venue address are placeholders.
-- Course images are emoji stand-ins for real photos.
+- Save quote requests to a database so a consultant receives them straight away.
+- Online enrolment and payment for each intake.
+- Learner accounts showing courses, progress and certificates.
+
+## Photo credits
+
+Pet photos are from Pixabay (via the free yavuzceliker/sample-images collection) and are used under the Pixabay Content License.
 
 ## Academic note
 

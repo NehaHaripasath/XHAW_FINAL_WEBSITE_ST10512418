@@ -42,17 +42,28 @@
   <div class="hero">
     <div>
       <h1 id="home-h">Practical pet care skills, taught with heart</h1>
-      <p>Pawsitive Pet Academy in Durban teaches pet owners, pet sitters, kennel staff and aspiring professionals how to care for, train and work with animals. Choose a six-month programme or a six-week short course.</p>
-      <a class="btn" href="#courses">Browse courses</a> <a class="btn alt" href="#fees">Get a quote</a>
+      <p class="lead">Six-month programmes and six-week short courses in Durban.</p>
+
+      <!-- Course finder: a drop-down of every course, filled from the course list in js/script.js -->
+      <form class="finder" id="finder" novalidate>
+        <label for="find">Find a course</label>
+        <div class="finder-row">
+          <select id="find" aria-describedby="find-err"><option value="">Choose a course</option></select>
+          <button class="btn" type="submit">View course</button>
+        </div>
+        <p class="field-err" id="find-err"></p>
+      </form>
+
+      <p class="hero-links"><a href="#courses">Browse all courses</a><span aria-hidden="true"> · </span><a href="#fees">Get a quote</a></p>
     </div>
-    <div class="pic" role="img" aria-label="Dog and paw prints">&#128021;&#128062;</div>
+    <img class="photo hero-photo" src="img/hero.jpg" alt="A chocolate Labrador sitting outdoors among autumn trees" width="1200" height="800" fetchpriority="high">
   </div>
-  <h2>Where would you like to start?</h2>
-  <div class="grid">
-    <div class="card"><div class="pic" aria-hidden="true">&#127891;</div><h3>Six-month programmes</h3><p>Canine Obedience, Pet Grooming, Animal Behaviour and Pet Business Management.</p><a href="#courses">See the programmes</a></div>
-    <div class="card"><div class="pic warm" aria-hidden="true">&#129654;</div><h3>Six-week short courses</h3><p>Puppy Care, Pet First Aid and Basic Dog Walking.</p><a href="#courses">See the short courses</a></div>
-    <div class="card"><div class="pic" aria-hidden="true">&#128176;</div><h3>Save when you combine</h3><p>Two courses save 5%, three save 10%, and more than three save 15%.</p><a href="#fees">Calculate your fees</a></div>
-  </div>
+
+  <ul class="facts" aria-label="At a glance">
+    <li><strong>7</strong> courses</li>
+    <li><strong>6 months</strong> or <strong>6 weeks</strong></li>
+    <li>Save up to <strong>15%</strong></li>
+  </ul>
 </section>
 
 <!-- ================= ABOUT ================= -->
@@ -64,7 +75,7 @@
       <p>Pawsitive Pet Academy was established in 2023 by Sarah Smith and offers training courses in Durban. Hundreds of pet owners and aspiring pet care professionals have completed our six-month Professional Development Programmes and six-week Practical Skills Courses.</p>
       <p>Sarah noticed that many people own pets without knowing much about proper care, training, nutrition or emergency care. The academy exists to change that, and to create jobs in the pet care industry.</p>
     </div>
-    <div class="pic warm" role="img" aria-label="Cat and dog">&#128008;&#128054;</div>
+    <img class="photo" src="img/about.jpg" alt="A red setter sitting happily in a meadow of flowers" width="1200" height="800" loading="lazy">
   </div>
   <div class="grid section-gap">
     <div class="card"><h3>Vision</h3><p>A community where every pet is cared for by someone who knows how.</p></div>
@@ -155,7 +166,7 @@
       <p><strong>Phone:</strong> <a href="tel:+27310000000">031&nbsp;000&nbsp;0000</a><br><strong>Email:</strong> <a href="mailto:info@pawsitivepet.example">info@pawsitivepet.example</a></p>
       <p><strong>Social:</strong> <a href="https://www.facebook.com/" target="_blank" rel="noopener">Facebook</a> &middot; <a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a> &middot; <a href="https://www.tiktok.com/" target="_blank" rel="noopener">TikTok</a></p>
       <h2 class="sub">Venue</h2>
-      <p>Pawsitive Pet Academy<br>[Street address], Durban, KwaZulu-Natal</p>
+      <p>Pawsitive Pet Academy<br>24 Paw Lane, Morningside<br>Durban, KwaZulu-Natal, 4001</p>
       <h2 class="sub">Office hours</h2>
       <div class="table-wrap">
         <table>

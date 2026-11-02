@@ -7,7 +7,7 @@ A responsive website for **Pawsitive Pet Academy**, a Durban-based pet care and 
 
 ## Pages
 
-- **Home:** introduction, links to the course lists and the fee calculator
+- **Home:** a clean hero with a photo, a **Find a course** drop-down, links to all courses and the fee calculator, and three key facts
 - **About Us:** history, vision, mission and goals
 - **Courses:** six-month programmes, six-week short courses and a comparison table of all seven courses
 - **Individual course pages:** purpose, content and fee for each of the 7 courses, with an add/remove button
@@ -22,7 +22,7 @@ All pages live in `index.html` and switch with the URL hash (for example `#fees`
 |---|---|
 | CSS | `css/style.css`: design tokens, layout, components, form states, tables, responsive and print rules |
 | JavaScript | `js/script.js`: course data, rendering, validation, fee calculator, navigation, router |
-| Drop-down menu | **Courses** drop-down in the main navigation (mouse, keyboard arrows and Escape). **Preferred intake** drop-down on the fees form. |
+| Drop-down menu | **Courses** drop-down in the main navigation (mouse, keyboard arrows and Escape). **Find a course** drop-down on the home page. **Preferred intake** drop-down on the fees form. |
 | Error handling | Every fee-form field is checked on submit. Each field shows its own message, a summary box lists all problems with links to each field, and messages clear as soon as the field is fixed. Unknown page addresses fall back to Home. |
 | Table | Course comparison table (Courses), discount tiers table and quote table (Calculate Fees), office hours table (Contact) |
 | Matches the mobile app | Same seven courses, fees, discount tiers, 15% VAT and teal/coral palette |
@@ -97,5 +97,6 @@ Checked before submission:
 | Sivanesan Rasen | ST10514044 | sivanesanrasen | 
 | Haylee Alexander |ST10504600| hayleealexander | 
 
+## Photo credits
 
-
+Pet photos are from Pixabay (via the free yavuzceliker/sample-images collection) and are used under the Pixabay Content License.
