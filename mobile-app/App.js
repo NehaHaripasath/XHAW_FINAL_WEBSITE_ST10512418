@@ -49,7 +49,8 @@ const PHOTOS = {
   'first-aid': require('./assets/photos/first-aid.jpg'),
   walking: require('./assets/photos/walking.jpg'),
 };
-const MAP_URL = 'https://www.openstreetmap.org/export/embed.html?bbox=30.95%2C-29.92%2C31.10%2C-29.80&layer=mapnik';
+const MAP_URL = 'https://www.openstreetmap.org/export/embed.html?bbox=30.990%2C-29.848%2C31.036%2C-29.816&layer=mapnik&marker=-29.8320%2C31.0130';
+const DIRECTIONS_URL = 'https://www.google.com/maps/dir/?api=1&destination=-29.8320%2C31.0130';
 
 // Money is kept in whole cents so every line of the quote adds up exactly.
 const R = (cents) => {
@@ -444,12 +445,13 @@ function Main() {
     <Card>
       <Text style={s.h3}>Venue</Text>
       <Text style={s.p}>Pawsitive Pet Academy{'\n'}24 Paw Lane, Morningside{'\n'}Durban, KwaZulu-Natal, 4001</Text>
+      <Btn title="Get directions" alt onPress={() => open(DIRECTIONS_URL)} label="Get directions to our venue" />
     </Card>
     <H2 style={s.gap}>Office hours</H2>
     <Table head={['Day', 'Hours']} rows={[['Monday to Friday', '08:00 to 17:00'], ['Saturday', '08:00 to 12:00'], ['Sunday and public holidays', 'Closed']]} />
     <H2 style={s.gap}>Find us</H2>
     <View style={s.map}>
-      <WebView source={{ uri: MAP_URL }} startInLoadingState accessibilityLabel="Map of Durban" />
+      <WebView source={{ uri: MAP_URL }} startInLoadingState accessibilityLabel="Map showing our venue in Morningside, Durban" />
     </View>
   </>);
 

@@ -2,7 +2,7 @@
 
 A React Native (Expo) mobile app for **Pawsitive Pet Academy**, a Durban-based pet care and training academy founded by Sarah Smith. Users can browse courses, read course details, get a fee quote with discounts and VAT, and find the academy's contact details.
 
-Built by [Group name] for XHAW5112, Task 3. It has the same courses, fees, discount rules, colours and logo as the Pawsitive Pet Academy website.
+Built by Neha Haripasath, Sivanesan Rasen, Haylee Alexander and Ali Gaffar for XHAW5112, Task 3. It has the same courses, fees, discount rules, colours and logo as the Pawsitive Pet Academy website.
 
 ## Features
 
@@ -11,7 +11,7 @@ Built by [Group name] for XHAW5112, Task 3. It has the same courses, fees, disco
 - **Courses:** a **Find a course** drop-down, six-month programmes and six-week short courses (each with a photo, linking to its own page), plus a table comparing all seven courses.
 - **Course details:** purpose, content and fee for each of the 7 courses, with an add/remove selection button.
 - **Calculate Fees:** contact form, course checkboxes, preferred-intake drop-down, discount table and a quote table. A badge on the Fees tab shows how many courses are selected.
-- **Contact:** tap-to-call, tap-to-email, tappable social links, venue address (24 Paw Lane, Morningside, Durban), office hours table and an embedded map.
+- **Contact:** tap-to-call, tap-to-email, tappable social links, venue address (24 Paw Lane, Morningside, Durban), office hours table, an embedded map marking the venue and a Get directions button.
 
 ## Fee rules
 
@@ -96,7 +96,9 @@ mobile-app/
 
 ## Design
 
-The app follows the high-fidelity wireframes designed in Figma: [Figma link]
+The app follows the high-fidelity wireframes designed in Figma: https://blurry-clip-31638226.figma.site
+
+Video demonstration of the website and app: https://youtu.be/JgIASkczmog
 
 | Colour | Hex |
 |---|---|

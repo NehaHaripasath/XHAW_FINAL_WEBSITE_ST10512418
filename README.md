@@ -1,6 +1,18 @@
 # Pawsitive Pet Academy: Website
 
-A responsive website for **Pawsitive Pet Academy**, a Durban-based pet care and training academy. Built by [Group name] for XHAW5112, Task 3 (Phase 1: Website CSS and JavaScript).
+A responsive website for **Pawsitive Pet Academy**, a Durban-based pet care and training academy. Built by Neha Haripasath, Sivanesan Rasen, Haylee Alexander and Ali Gaffar for XHAW5112, Task 3.
+
+## Links
+
+| Item | Link |
+|---|---|
+| Published website | https://nehaharipasath.github.io/XHAW_FINAL_WEBSITE_ST10512418/ |
+| Website and mobile app repository | https://github.com/NehaHaripasath/XHAW_FINAL_WEBSITE_ST10512418 |
+| Mobile app | [`mobile-app/`](mobile-app/) in this repository |
+| Video demonstration (YouTube) | https://youtu.be/JgIASkczmog |
+| Website wireframes (Figma) | https://comic-mesh-29595720.figma.site |
+| Mobile app wireframes (Figma) | https://blurry-clip-31638226.figma.site |
+| PowerPoint presentation | [`presentation/Pawsitive_Pet_Academy_Presentation.pptx`](presentation/Pawsitive_Pet_Academy_Presentation.pptx) |
 
 
 
@@ -8,11 +20,11 @@ A responsive website for **Pawsitive Pet Academy**, a Durban-based pet care and 
 ## Pages
 
 - **Home:** a clean hero with a photo, a **Find a course** drop-down, links to all courses and the fee calculator, and three key facts
-- **About Us:** history, vision, mission and goals
+- **About Us:** history, vision, mission, goals and a photo
 - **Courses:** six-month programmes, six-week short courses and a comparison table of all seven courses
 - **Individual course pages:** purpose, content and fee for each of the 7 courses, with an add/remove button
 - **Calculate Fees:** contact form, course checkboxes, intake drop-down, discount table and quote table
-- **Contact:** phone, email, social links, venue address, office hours table and map
+- **Contact:** phone, email, social links, venue address, a map marking the venue, a Get directions button and an office hours table
 
 All pages live in `index.html` and switch with the URL hash (for example `#fees` or `#course-2`), so links, the back button and bookmarks all work.
 
@@ -54,7 +66,7 @@ No build step. Open `index.html` in a browser, or publish with GitHub Pages:
 
 1. Push this folder to the repository's `main` branch.
 2. On GitHub go to **Settings → Pages**, set **Source** to *Deploy from a branch*, choose `main` and `/ (root)`, then **Save**.
-3. After a minute the site is live at `https://nehaharipasath.github.io/XHAW_FINAL_WEBSITE_ST10512418/`. Put that link at the top of this README and in the final report.
+3. After a minute the site is live at `https://nehaharipasath.github.io/XHAW_FINAL_WEBSITE_ST10512418/`.
 
 ## Files
 
@@ -62,6 +74,9 @@ No build step. Open `index.html` in a browser, or publish with GitHub Pages:
 index.html          page structure (all views)
 css/style.css       all styling
 js/script.js        all behaviour
+img/                pet photos
+mobile-app/         the React Native (Expo) mobile app
+presentation/       the PowerPoint presentation
 README.md           this file
 ```
 
@@ -77,6 +92,9 @@ Teal and coral palette from the academy's brand: Deep Teal #0B5E5E, Teal #0F7C7C
 - Added tables: course comparison, discount tiers, office hours; the quote table now shows the amount after discount.
 - Added a Print quote button and print styles.
 - Hover and page-change animations, which are switched off for users who prefer reduced motion.
+- Real pet photos on the home page, About Us, course cards and course pages.
+- New home page: headline, **Find a course** drop-down, hero photo and three key facts.
+- Contact page: venue street address, a map marking the venue and a Get directions button.
 - Accessibility fixes: correct heading order, screen-reader text for the course counter, larger checkboxes, focus moves to each new page's heading, and a message for browsers with JavaScript turned off.
 
 ## Quality checks
@@ -91,11 +109,12 @@ Checked before submission:
 
 ## Team
 
-| Name              ST number | GitHub username 
-|---|                  ---|            ---|
+| Name | ST number | GitHub username |
+|---|---|---|
 | Neha Haripasath | ST10512418 | nehaharipasath |
-| Sivanesan Rasen | ST10514044 | sivanesanrasen | 
-| Haylee Alexander |ST10504600| hayleealexander | 
+| Sivanesan Rasen | ST10514044 | sivanesanrasen |
+| Haylee Alexander | ST10504600 | hayleealexander |
+| Ali Gaffar | ST10497389 | – |
 
 ## Photo credits
 
