@@ -1,6 +1,6 @@
 # Pawsitive Pet Academy: Website
 
-A responsive website for **Pawsitive Pet Academy**, a Durban-based pet care and training academy. Built by Neha Haripasath, Sivanesan Rasen, Haylee Alexander and Ali Gaffar for XHAW5112, Task 3.
+A responsive website for **Pawsitive Pet Academy**, a Durban-based pet care and training academy. Built by Neha Haripasath, Sivanesan Rasen, Haylee Alexander and Ali Gaffar for XHAW5112, Task 3. All members were part of planning and testing this app.
 
 ## Links
 
