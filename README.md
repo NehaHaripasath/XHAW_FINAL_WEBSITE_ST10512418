@@ -114,7 +114,7 @@ Checked before submission:
 | Neha Haripasath | ST10512418 | nehaharipasath |
 | Sivanesan Rasen | ST10514044 | sivanesanrasen |
 | Haylee Alexander | ST10504600 | hayleealexander |
-| Ali Gaffar | ST10497389 | – |
+| Ali Gaffar | ST10497389 | aligaffar |
 
 ## Photo credits
 
