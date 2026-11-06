@@ -119,3 +119,7 @@ Checked before submission:
 ## Photo credits
 
 Pet photos are from Pixabay (via the free yavuzceliker/sample-images collection) and are used under the Pixabay Content License.
+
+## Known Limitations 
+- Quote form will only be on the front-end and it does not send or keep data
+- Print layout operates best when using Chrome  
